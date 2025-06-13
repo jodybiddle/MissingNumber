@@ -50,9 +50,8 @@
                 return;
             }
 
-            // --- Step 2: Parse the Input String into an Array of Numbers ---
             int[] numbers;
-            // The user's input string is the first argument (e.g., "3,0,1").
+            //grab the input
             string inputString = args[0];
 
             //trim off any square brackets if they were used in the input
@@ -71,8 +70,8 @@
                         }
                         else
                         {
-                            // If it's not a valid number (like "hello"), throw an error.
-                            throw new FormatException($"Not a number: '{s.Trim()}'. Make sure your parameters are all numbers!");
+                            // If it's not a number throw an error.
+                            throw new FormatException($"Not a number: '{s.Trim()}'. Make sure your parameters are all whole integers!");
                         }
                     })
                     .ToArray();
@@ -82,7 +81,7 @@
                 Console.WriteLine($"Error parsing input: {ex.Message}");
                 return;
             }
-            // find the missing number using one of the implementations of IMissingNumberFinder
+            // find the missing number
             IMissingNumberFinder finder = new SummationMissingNumberFinder();
             int missingNumber = finder.FindMissingNumber(numbers);
             Console.WriteLine($"Input: [{string.Join(", ", numbers)}]");
